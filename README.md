@@ -16,11 +16,13 @@ The following is the list of items, which are required to be completed.
 
 ## Team
 
-It is recommended to complete this assignment in a group of 2-4 students.
-1. Student 1
-2. Student name 2
-3. Name 3
-4. Name 4
+It is recommended to complete this assignment in a group of 2-4 students.  
+  
+Practical Class C Group 2
+1. Hanyu Xiao
+2. Tan Qian Ru, Nicole
+3. Minh Triet Nguyen
+4. Yuancheng Jin
 
 
 # Project planning BEFORE iteration-1, (see chapters 1-3)
