@@ -24,6 +24,11 @@ Practical Class C Group 2
 3. Minh Triet Nguyen
 4. Yuancheng Jin
 
+## Project Overview
+
+## Project Goals
+
+## Team Roles
 
 # Project planning BEFORE iteration-1, (see chapters 1-3)
 Checklist/TODOs: 
