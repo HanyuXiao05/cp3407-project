@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JCU Gym Management System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo h1 {
+            color: #667eea;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 0.5rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            overflow-x: auto;
+        }
+
+        .nav-tab {
+            background: transparent;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            font-weight: 500;
+        }
+
+        .nav-tab:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .nav-tab.active {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .card h2 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .form-row > * {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #555;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        }
+
+        .table-container {
+            overflow-x: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e1e5e9;
+        }
+
+        th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #495057;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .status-active {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-inactive {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .status-maintenance {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .search-bar {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-bar input {
+            padding-left: 3rem;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border-color: #28a745;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border-color: #dc3545;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .form-row {
+                flex-direction: column;
+            }
+
+            .form-row > * {
+                min-width: auto;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-tabs {
+                flex-direction: column;
+            }
+
+            .nav-tab {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">
+                <h1>🏋️ JCU Gym Management</h1>
+            </div>
+            <div class="user-info">
+                <span id="welcome-text">Welcome, Admin</span>
+                <button class="btn btn-secondary" onclick="logout()">Logout</button>
+              </div>
+
+              <script>
+                function logout() {
+                  // 可选：清除登录信息
+                  localStorage.removeItem("gymUsername");
+
+                  // 跳转回登录页面
+                  window.location.href = "login.html";
+                }
+              </script>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showTab('dashboard')">Dashboard</button>
+            <button class="nav-tab" onclick="showTab('members')">Members</button>
+            <button class="nav-tab" onclick="showTab('classes')">Classes</button>
+            <button class="nav-tab" onclick="showTab('equipment')">Equipment</button>
+            <button class="nav-tab" onclick="showTab('bookings')">Bookings</button>
+            <button class="nav-tab" onclick="showTab('staff')">Staff</button>
+            <button class="nav-tab" onclick="showTab('reports')">Reports</button>
+        </div>
+
+        <!-- Dashboard Tab -->
+        <div id="dashboard" class="tab-content active">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalMembers">1,247</div>
+                    <div class="stat-label">Total Members</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="activeClasses">23</div>
+                    <div class="stat-label">Active Classes</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="equipmentCount">156</div>
+                    <div class="stat-label">Equipment Items</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="todayBookings">89</div>
+                    <div class="stat-label">Today's Bookings</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Recent Activity</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Activity</th>
+                                <th>Member</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="activityLog">
+                            <tr>
+                                <td>09:30 AM</td>
+                                <td>Class Booking - Yoga Fundamentals</td>
+                                <td>Sarah Johnson (S123456)</td>
+                                <td><span class="status-badge status-active">Confirmed</span></td>
+                            </tr>
+                            <tr>
+                                <td>09:15 AM</td>
+                                <td>Equipment Check-in - Treadmill #5</td>
+                                <td>Mike Chen (S987654)</td>
+                                <td><span class="status-badge status-active">Completed</span></td>
+                            </tr>
+                            <tr>
+                                <td>08:45 AM</td>
+                                <td>New Member Registration</td>
+                                <td>Emma Wilson (S456789)</td>
+                                <td><span class="status-badge status-active">Active</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Members Tab -->
+        <div id="members" class="tab-content">
+            <div class="card">
+                <h2>Member Management</h2>
+                <div class="form-row">
+                    <div class="search-bar">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" placeholder="Search members..." id="memberSearch">
+                    </div>
+                    <button class="btn" onclick="showModal('memberModal')">+ Add New Member</button>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Student ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Membership Type</th>
+                                <th>Status</th>
+                                <th>Expires</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="membersTable">
+                            <tr>
+                                <td>S123456</td>
+                                <td>Sarah Johnson</td>
+                                <td>sarah.johnson@jcu.edu.au</td>
+                                <td>Student Annual</td>
+                                <td><span class="status-badge status-active">Active</span></td>
+                                <td>Dec 31, 2025</td>
+                                <td>
+                                    <button class="btn btn-secondary" onclick="editMember('S123456')">Edit</button>
+                                    <button class="btn btn-danger" onclick="deleteMember('S123456')">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>S987654</td>
+                                <td>Mike Chen</td>
+                                <td>mike.chen@jcu.edu.au</td>
+                                <td>Staff Monthly</td>
+                                <td><span class="status-badge status-active">Active</span></td>
+                                <td>Jun 30, 2025</td>
+                                <td>
+                                    <button class="btn btn-secondary" onclick="editMember('S987654')">Edit</button>
+                                    <button class="btn btn-danger" onclick="deleteMember('S987654')">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Classes Tab -->
+        <div id="classes" class="tab-content">
+            <div class="card">
+                <h2>Class Management</h2>
+                <div class="form-row">
+                    <button class="btn" onclick="showModal('classModal')">+ Schedule New Class</button>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Class Name</th>
+                                <th>Instructor</th>
+                                <th>Time</th>
+                                <th>Duration</th>
+                                <th>Capacity</th>
+                                <th>Enrolled</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="classesTable">
+                            <tr>
+                                <td>Yoga Fundamentals</td>
+                                <td>Lisa Park</td>
+                                <td>Mon/Wed/Fri 10:00 AM</td>
+                                <td>60 min</td>
+                                <td>20</td>
+                                <td>18</td>
+                                <td><span class="status-badge status-active">Active</span></td>
+                                <td>
+                                    <button class="btn btn-secondary">Edit</button>
+                                    <button class="btn btn-danger">Cancel</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>HIIT Training</td>
+                                <td>Tom Wilson</td>
+                                <td>Tue/Thu 6:00 PM</td>
+                                <td>45 min</td>
+                                <td>15</td>
+                                <td>15</td>
+                                <td><span class="status-badge status-active">Full</span></td>
+                                <td>
+                                    <button class="btn btn-secondary">Edit</button>
+                                    <button class="btn btn-danger">Cancel</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Equipment Tab -->
+        <div id="equipment" class="tab-content">
+            <div class="card">
+                <h2>Equipment Management</h2>
+                <div class="form-row">
+                    <button class="btn" onclick="showModal('equipmentModal')">+ Add Equipment</button>
+                    <button class="btn btn-secondary" onclick="generateMaintenanceReport()">Maintenance Report</button>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Equipment ID</th>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Status</th>
+                                <th>Last Maintenance</th>
+                                <th>Next Service</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="equipmentTable">
+                            <tr>
+                                <td>EQ001</td>
+                                <td>Treadmill #1</td>
+                                <td>Cardio</td>
+                                <td><span class="status-badge status-active">Available</span></td>
+                                <td>May 15, 2025</td>
+                                <td>Aug 15, 2025</td>
+                                <td>
+                                    <button class="btn btn-secondary">Service</button>
+                                    <button class="btn btn-danger">Report Issue</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>EQ023</td>
+                                <td>Squat Rack #3</td>
+                                <td>Strength</td>
+                                <td><span class="status-badge status-maintenance">Maintenance</span></td>
+                                <td>Apr 20, 2025</td>
+                                <td>May 30, 2025</td>
+                                <td>
+                                    <button class="btn btn-success">Complete Service</button>
+                                    <button class="btn btn-secondary">View Details</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bookings Tab -->
+        <div id="bookings" class="tab-content">
+            <div class="card">
+                <h2>Facility Bookings</h2>
+                <div class="form-row">
+                    <input type="date" id="bookingDate" value="2025-05-28">
+                    <select id="facilityFilter">
+                        <option value="">All Facilities</option>
+                        <option value="court">Basketball Court</option>
+                        <option value="pool">Swimming Pool</option>
+                        <option value="studio">Fitness Studio</option>
+                    </select>
+                    <button class="btn" onclick="showModal('bookingModal')">+ New Booking</button>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Facility</th>
+                                <th>Member</th>
+                                <th>Duration</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bookingsTable">
+                            <tr>
+                                <td>10:00 AM</td>
+                                <td>Basketball Court A</td>
+                                <td>David Kim (S654321)</td>
+                                <td>2 hours</td>
+                                <td><span class="status-badge status-active">Confirmed</span></td>
+                                <td>
+                                    <button class="btn btn-secondary">Modify</button>
+                                    <button class="btn btn-danger">Cancel</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2:00 PM</td>
+                                <td>Fitness Studio B</td>
+                                <td>Jessica Lee (S111222)</td>
+                                <td>1 hour</td>
+                                <td><span class="status-badge status-active">Confirmed</span></td>
+                                <td>
+                                    <button class="btn btn-secondary">Modify</button>
+                                    <button class="btn btn-danger">Cancel</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Staff Tab -->
+        <div id="staff" class="tab-content">
+            <div class="card">
+                <h2>Staff Management</h2>
+                <div class="form-row">
+                    <button class="btn" onclick="showModal('staffModal')">+ Add Staff Member</button>
+                    <button class="btn btn-secondary" onclick="generateSchedule()">Generate Schedule</button>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Role</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Certifications</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="staffTable">
+                            <tr>
+                                <td>Lisa Park</td>
+                                <td>Fitness Instructor</td>
+                                <td>lisa.park@jcu.edu.au</td>
+                                <td>(07) 4781-5555</td>
+                                <td>Yoga, Pilates</td>
+                                <td><span class="status-badge status-active">Active</span></td>
+                                <td>
+                                    <button class="btn btn-secondary">Edit</button>
+                                    <button class="btn btn-secondary">Schedule</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Tom Wilson</td>
+                                <td>Personal Trainer</td>
+                                <td>tom.wilson@jcu.edu.au</td>
+                                <td>(07) 4781-5556</td>
+                                <td>HIIT, Strength</td>
+                                <td><span class="status-badge status-active">Active</span></td>
+                                <td>
+                                    <button class="btn btn-secondary">Edit</button>
+                                    <button class="btn btn-secondary">Schedule</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reports Tab -->
+        <div id="reports" class="tab-content">
+            <div class="card">
+                <h2>Reports & Analytics</h2>
+                <div class="form-row">
+                    <select id="reportType">
+                        <option value="membership">Membership Report</option>
+                        <option value="revenue">Revenue Report</option>
+                        <option value="usage">Facility Usage Report</option>
+                        <option value="maintenance">Equipment Maintenance Report</option>
+                    </select>
+                    <input type="date" id="reportStartDate" value="2025-05-01">
+                    <input type="date" id="reportEndDate" value="2025-05-28">
+                    <button class="btn" onclick="generateReport()">Generate Report</button>
+                </div>
+
+                <div id="reportResults" class="table-container" style="display: none;">
+                    <h3>Report Results</h3>
+                    <table>
+                        <thead id="reportTableHead">
+                        </thead>
+                        <tbody id="reportTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Member Modal -->
+    <div id="memberModal" class="modal">
+        <div class="modal-content">
+            <button class="close" onclick="hideModal('memberModal')">&times;</button>
+            <h2>Add New Member</h2>
+            <form id="memberForm">
+                <div class="form-group">
+                    <label for="studentId">Student/Staff ID</label>
+                    <input type="text" id="studentId" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="membershipType">Membership Type</label>
+                        <select id="membershipType" required>
+                            <option value="">Select Type</option>
+                            <option value="student-annual">Student Annual</option>
+                            <option value="student-semester">Student Semester</option>
+                            <option value="staff-annual">Staff Annual</option>
+                            <option value="staff-monthly">Staff Monthly</option>
+                            <option value="community">Community</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="emergencyContact">Emergency Contact</label>
+                    <input type="text" id="emergencyContact" placeholder="Name and Phone">
+                </div>
+                <div class="form-row">
+                    <button type="button" class="btn btn-secondary" onclick="hideModal('memberModal')">Cancel</button>
+                    <button type="submit" class="btn">Add Member</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Class Modal -->
+    <div id="classModal" class="modal">
+        <div class="modal-content">
+            <button class="close" onclick="hideModal('classModal')">&times;</button>
+            <h2>Schedule New Class</h2>
+            <form id="classForm">
+                <div class="form-group">
+                    <label for="className">Class Name</label>
+                    <input type="text" id="className" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="instructor">Instructor</label>
+                        <select id="instructor" required>
+                            <option value="">Select Instructor</option>
+                            <option value="lisa-park">Lisa Park</option>
+                            <option value="tom-wilson">Tom Wilson</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="capacity">Capacity</label>
+                        <input type="number" id="capacity" min="1" max="50" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="classDate">Date</label>
+                        <input type="date" id="classDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="classTime">Time</label>
+                        <input type="time" id="classTime" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="duration">Duration (minutes)</label>
+                        <input type="number" id="duration" min="15" max="180" value="60" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="classDescription">Description</label>
+                    <textarea id="classDescription" rows="3"></textarea>
+                </div>
+                <div class="form-row">
+                    <button type="button" class="btn btn-secondary" onclick="hideModal('classModal')">Cancel</button>
+                    <button type="submit" class="btn">Schedule Class</button
