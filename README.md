@@ -16,11 +16,46 @@ The following is the list of items, which are required to be completed.
 
 ## Team
 
-It is recommended to complete this assignment in a group of 2-4 students.
-1. Student 1
-2. Student name 2
-3. Name 3
-4. Name 4
+It is recommended to complete this assignment in a group of 2-4 students.  
+  
+Practical Class C Group 2
+1. Hanyu Xiao
+2. Tan Qian Ru, Nicole
+3. Minh Triet Nguyen
+4. Yuancheng Jin
+
+## Project Overview
+
+**Project Title: JCU Gym Management System Upgrade - Modern Gym Management System with MySQL database**
+
+**Justification for the Project:**
+
+**Why a New ICT Solution is Required?**
+
+This project seeks to address the request for the JCU gym management system to incorporate modern features for enhanced user experience (for Gym Users and Administrators). The current system fall short of modern security expectations and the facilities cannot be seen until users scan in (requires membership), hindering decision-making (e.g., for booking). To address these challenges, an ICT solution is required.
+
+**Market and ICT Technology Research:**
+
+The fitness and wellness industry has witnessed significant advancements with the integration of ICT solutions.
+
+## Project Goals
+
+## Team Roles
+- Requirements/User stories: All 
+- Design:
+  - Add page to GitHub explaining design of all major components:
+  - User interface design:
+  - Architectural design:
+  - Database design:
+- Implementation/Code:
+  - Frontend:
+  - Backend:
+    - Cloud: 
+    - Frontend and backend integration:
+- Test:
+- Version control:
+- Agile software engineering: 
+- Project Technical Writing:
 
 
 # Project planning BEFORE iteration-1, (see chapters 1-3)
