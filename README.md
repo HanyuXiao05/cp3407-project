@@ -36,7 +36,9 @@ This project seeks to address the request for the JCU gym management system to i
 
 **Market and ICT Technology Research:**
 
-The fitness and wellness industry has witnessed significant advancements with the integration of ICT solutions.
+The fitness and recreation management industry has experienced substantial transformation through ICT integration. Modern gym management systems now incorporate features such as mobile app integration, real-time facility monitoring, contactless payment processing, and data-driven member engagement strategies. Cloud-based solutions have become the industry standard, offering scalability, reliability, and cost-effectiveness.
+
+Market research indicates a growing demand for integrated fitness management platforms that combine facility booking, member management, and health tracking capabilities. University fitness facilities particularly benefit from systems that integrate with existing student information systems and accommodate diverse user groups including students, staff, and community members. Technologies such as React for frontend development, Node.js for backend services, and cloud platforms like AWS provide robust foundations for such comprehensive systems.
 
 ## Project Goals
 
