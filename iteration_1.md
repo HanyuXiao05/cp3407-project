@@ -6,30 +6,35 @@ Checklist:
 
 * Assumed Velocity: 0.7
 * Number of developers: 4
-* Total estimated amount of work: 10 days
+* Total estimated amount of work: (initial: 11) days
 
 User stories or tasks (see chapter 4):
 # Todo
-1. Secure Storage, priority Low, 3 days 
-2. Secure Online Registration, priority High, 2 days  
-3. Session Booking, priority High, 3 days
-4. Gym Usage Tracking, priority Medium, 2 days
+1. Secure Storage, priority Low, 3 (initial: 3) days  
+   - Create database schema with sample records, 1 day
+   - Integrate database with Flask using Flask-SQLAlchemy, 2 day
+2. Secure Online Registration, priority High, 6 (initial: 2) days  
+   - Analyse form considerations (user roles, validation, compliance), 1 day
+   - Frontend form validation + accessibility, 1 day 
+   - Backend registration logic (hashing, email, storage), 1 day 
+   - Payment integration (gateway setup, recurring payments), 1 day 
+   - Security enforcement (auth, MFA, XSS/SQL/CSRF protection), 1 day 
+   - Testing (unit + functional for reg flow), 1 day
+3. Membership Payment Handling, priority Low, (initial: 3) days
+4. Session Booking, priority High, (initial: 3) days
 
 # In progress:
-* Secure Storage (Tan Qian Ru, Nicole,Yuancheng Jin), 14 June 2025
-* Secure Online Registration (Hanyu Xiao, Minh Triet Nguyen, Yuancheng Jin, Tan Qian Ru, Nicole), 14 June 2025
-* Session Booking (Hanyu Xiao, Minh Triet Nguyen, Yuancheng Jin, Tan Qian Ru, Nicole), 14 June 2025
-* Gym Usage Tracking (Hanyu Xiao, Minh Triet Nguyen, Yuancheng Jin, Tan Qian Ru, Nicole), 14 June 2025
-
-
+* Create database schema with sample records (TQRN), 17 June 2025
+* Integrate database with Flask using Flask-SQLAlchemy (HX, YJ), 21 June 2025
+* Analyse form considerations (user roles, validation, compliance) (MTN), 18 June 2025
 
 # Completed:
 * Task-3 (developer name or initials), date completed
 
 ### Burn Down for iteration-1 (see chapter 4):
 Update this at least once per week
-* 4 weeks left, 28 days of estimated amount of work 
-* 2 weeks left, 14 days
-* 1 weeks left, 7 days
-* 0 weeks left, 0 days
+* 4 weeks left, xx days of estimated amount of work 
+* 2 weeks left, xx days
+* 1 weeks left, xx days
+* 0 weeks left, xx days
 * Actual Velocity: ??
