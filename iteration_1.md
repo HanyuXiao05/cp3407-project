@@ -30,7 +30,8 @@ User stories or tasks (see chapter 4):
 
 # Completed:
 * Task-3 (developer name or initials), date completed
-
+* Secure Storage，completed
+* 
 ### Burn Down for iteration-1 (see chapter 4):
 Update this at least once per week
 * 4 weeks left, xx days of estimated amount of work 
