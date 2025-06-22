@@ -6,7 +6,7 @@ Checklist:
 
 * Assumed Velocity: 0.7
 * Number of developers: 4
-* Total estimated amount of work: (initial: 11) days
+* Total estimated amount of work: 18 (initial: 11) days
 
 User stories or tasks (see chapter 4):
 # Todo
@@ -15,26 +15,38 @@ User stories or tasks (see chapter 4):
    - Integrate database with Flask using Flask-SQLAlchemy, 2 day
 2. Secure Online Registration, priority High, 6 (initial: 2) days  
    - Analyse form considerations (user roles, validation, compliance), 1 day
+   - Backend registration logic (hashing, storage, CSRF protection), 2 days 
+   - Backend registration logic (email), 1 day
    - Frontend form validation + accessibility, 1 day 
-   - Backend registration logic (hashing, email, storage), 1 day 
-   - Payment integration (gateway setup, recurring payments), 1 day 
-   - Security enforcement (auth, MFA, XSS/SQL/CSRF protection), 1 day 
-   - Testing (unit + functional for reg flow), 1 day
-3. Membership Payment Handling, priority Low, (initial: 3) days
-4. Session Booking, priority High, (initial: 3) days
+   - Testing (unit + functional for registration flow), 1 day 
+3. Membership Payment Handling, priority Low, 4 (initial: 3) days
+   - Backend online payment integration (mock transaction logic, success/failure states, storage), 1 day
+   - Backend offline payment integration (storage), 0.5 day
+   - Frontend form modification for online and offline payment (Includes alert to pay at counter for offline payment), 0.5 day
+   - Backend membership activation logic (storage, status), 0.5 day
+   - Frontend membership confirmation (status), 0.5 day
+   - Testing (unit + functional for membership handling flow), 1 day
+4. Session Booking, priority High, 5 (initial: 3) days
+   - Backend booking logic (slot availability, booking action + status, storage), 1 day
+   - Frontend display (calendar, slot availability, booking action + status), 1 day
+   - Backend booking logic (confirmation email (DRY), reminder emails), 1 day
+   - Integrated user authentication for session booking,1 day
+   - Testing (unit + functional for booking flow), 1 day
 
 # In progress:
-* Create database schema with sample records (TQRN), 17 June 2025
-* Integrate database with Flask using Flask-SQLAlchemy (HX, YJ), 21 June 2025
-* Analyse form considerations (user roles, validation, compliance) (MTN), 18 June 2025
+* 
+
+# Complete:
+* Analyse form considerations (user roles, validation, compliance) (MTN), 22 June 2025
 
 # Completed:
-* Task-3 (developer name or initials), date completed
-* Secure Storage，completed
-* 
+* Secure Storage
+   - Create database schema with sample records (TQRN), 20 June 2025
+   - Integrate database with Flask using Flask-SQLAlchemy (HX, YJ), 21 June 2025
+
 ### Burn Down for iteration-1 (see chapter 4):
 Update this at least once per week
-* 4 weeks left, xx days of estimated amount of work 
+* 4 weeks left, 18 days of estimated amount of work 
 * 2 weeks left, xx days
 * 1 weeks left, xx days
 * 0 weeks left, xx days
