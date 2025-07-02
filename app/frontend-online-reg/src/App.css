@@ -2,7 +2,7 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.page-header-line {
+.divider {
   height: 2px;
   background-color: #A0F9FF; 
   transform: translateY(55px);
@@ -93,43 +93,92 @@ input::placeholder {
 }
 
 .declaration-row input {
-  grid-column: 1;
+  grid-column: 1;         
   grid-row: 1;
-  margin-top: 4px;
+  margin-top: 4px;        
 }
 
 .declaration-row label {
-  grid-column: 2;
+  grid-column: 2;   
   grid-row: 1;
   font-size: 16px;
   line-height: 1.5;
 }
 
 .declaration-row .error-message {
-  grid-column: 1 / -1;
+  grid-column: 1 / -1;    
   top: 110px;
 }
 
 .registration-row {
-  grid-column: 1 / -1;
+  grid-column: 1 / -1;      
   display: flex;
   justify-content: center; 
   margin-top: 30px;
 }
 
 button {
+  border: none;
+  cursor: pointer;
+}
+
+.registration-row button {
   width: 362px;
   height: 40px;
   background-color: #172DD5;
   color: white;
   font-size: 18px;
   font-weight: 550;
-  border: none;
   border-radius: 8px;
-  cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-button:hover {
+.registration-row button:hover {
   background-color: #1f1fa3;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-box {
+  background-color: white;
+  border-radius: 8px;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.modal-box h2, .modal-box p, .modal-box button {
+  padding: 0 30px;
+}
+
+.modal-box h2 {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.modal-box p {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.modal-box .divider {
+  transform: none;
+  margin: 24px 0;
+}
+
+.modal-box button {
+  margin-bottom: 20px;
+  background: none;
+  font-size: 16px;
+  align-self: flex-end;
 }

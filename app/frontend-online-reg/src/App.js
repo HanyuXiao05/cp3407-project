@@ -9,18 +9,20 @@ export default function App() {
   const [member, setMember] = useState(EMPTY_MEMBER);
 
   const [errorMessages, setErrorMessages] = useState({});
+  const [showModal, setShowModal] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const errors = validateForm(member);
-    setErrorMessages(errors);         
+    setErrorMessages(errors);
     if (Object.keys(errors).length > 0) return;
   
     // registerMember(member)
     //   .then((response) => {
     //     console.log('Submitted:', response.data);
 
-        alert('Registration successful!'); 
+        // alert('Registration successful!'); 
+        setShowModal(true);
 
         setMember(EMPTY_MEMBER);
         
@@ -33,7 +35,7 @@ export default function App() {
 
   return (
     <>
-      <div className='page-header-line'></div>
+      <div className='divider'/>
       <div className='App'>
         <h1>JCU GYM MEMBERSHIP REGISTRATION</h1>
         <fieldset>
@@ -295,6 +297,28 @@ export default function App() {
           </form>
         </fieldset>
       </div>
+      {showModal && (
+        <div className='modal-overlay'>
+          <div className='modal-box'>
+            <h2>MEMBERSHIP ACTIVATED</h2>
+            <p>
+              An email has been sent to your registered email address containing your membership 
+              and payment details, along with the Gym Handbook.
+            </p>
+            <p>
+              If you have not received it, please check your spam/junk mail or verify that your 
+              details are correct.
+            </p>
+            <div className='divider'/>
+            <button onClick={() => {
+              setShowModal(false);
+              window.location.href = '/Session_Booking.html';
+            }}>
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </>
   );
 }
