@@ -50,7 +50,7 @@ User stories or tasks (see chapter 4):
 * Membership Payment Handling
    - Backend online payment integration (mock transaction logic, success/failure states, storage) (YJ), 1 July 2025
    - Backend offline payment integration (storage) (HX), 1 July 2025
-   - Frontend form modification for online and offline payment (Includes alert to pay at counter for offline payment) (MTN), 0.5 day
+   - Frontend form modification for online and offline payment (Includes alert to pay at counter for offline payment) (MTN), 1 July 2025
    - Backend membership activation logic (storage, status) (HX), 2 July 2025
    - Frontend membership confirmation (status) (TQRN), 2 July 2025
    - Testing for membership handling flow (All), 3 July 2025
@@ -59,12 +59,18 @@ User stories or tasks (see chapter 4):
    - Frontend display (calendar, slot availability, booking action + status) (MTN), 8 July 2025
    - Backend booking logic (confirmation email (DRY), reminder emails) (YJ), 9 July 2025
    - Integrated user authentication for session booking (YJ), 11 July 2025
-   - Testing for booking flow (All), 12 July 2025
+   - Testing for booking flow (All), 12 July 2025 
+
+Secure Storage was completed first due to high priority feature Secure Online Registration being dependent on it.
+Membership Payment Handling was completed before Session Booking, as it is part of Secure Online Registration 
+since payment is compulsory to register for a membership in the existing gym system.
 
 ### Burn Down for iteration-1 (see chapter 4):
 Update this at least once per week
 * 4 weeks left, 18 days of estimated amount of work 
-* 2 weeks left, xx days
-* 1 weeks left, xx days
-* 0 weeks left, xx days
-* Actual Velocity: ??
+* 2 weeks left, 10 days
+* 1 weeks left, 5 days
+* 0 weeks left, 0 days
+* Actual Velocity: 18 / (20 x 4) = 0.225
+
+<img src="burn_down_charts/iteration_1_chart.png" alt="Iteration 1 burn down chart" width="350"/>
