@@ -1,0 +1,102 @@
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 40px;
+}
+
+.formField {
+  position: relative;
+  padding: 8px 12px;
+  min-height: 90px;
+  margin-bottom: 10px;
+}
+
+.leftColumn {
+  grid-column: 1;
+}
+
+.rightColumn {
+  grid-column: 2;
+}
+
+.formField label {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.formField input, .formField select {
+  width: 100%;
+  margin-top: 4px;
+  font-size: 14px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+.formField input::placeholder {
+  color: #aaa;
+}
+
+.formField .errorMessage {
+  position: absolute;
+  top: 85px;
+  left: 12px;
+  right: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #FF3B30;
+}
+
+.declarationRow {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 25px;
+  position: relative;
+  min-height: 80px;
+  margin-top: 25px;
+}
+
+.declarationRow input {
+  grid-column: 1;
+  grid-row: 1;
+  margin-top: 4px;
+}
+
+.declarationRow label {
+  grid-column: 2;
+  grid-row: 1;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.declarationRow .errorMessage {
+  grid-column: 1 / -1;
+  top: 110px;
+}
+
+.registrationRow {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center; 
+  margin-top: 30px;
+}
+
+.registrationRow button {
+  width: 362px;
+  height: 40px;
+  background-color: #172DD5;
+  color: white;
+  font-size: 18px;
+  font-weight: 550;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.registrationRow button:hover {
+  background-color: #1f1fa3;
+}

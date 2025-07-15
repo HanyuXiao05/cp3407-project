@@ -1,42 +1,17 @@
-import validator from 'validator';
-import { 
+import {
+  JCU_ID_LENGTH,
   MAX_PASSWORD_BYTES, 
-  MIN_PASSWORD_LENGTH, 
-  JCU_ID_LENGTH 
+  MIN_PASSWORD_LENGTH  
 } from './constants';
+import {
+  isValidJCId,
+  isValidPhone,
+  isValidEmail,
+  isFittingPassword,
+  isValidPassword
+} from './validators'; 
 
-const encoder = new TextEncoder();
-
-export function isValidJCId(jCId) {
-  return validator.isLength(jCId, { 
-    min: JCU_ID_LENGTH, 
-    max: JCU_ID_LENGTH 
-  });
-}
-
-export function isValidPhone(phone) {
-  return validator.isMobilePhone(phone);
-}
-
-export function isValidEmail(email) {
-  return validator.isEmail(email);
-}
-
-export function isFittingPassword(password) {
-  return encoder.encode(password).length <= MAX_PASSWORD_BYTES;
-}
-
-export function isValidPassword(password) {
-  return validator.isStrongPassword(password, {
-    minLength: MIN_PASSWORD_LENGTH,
-    minLowercase: 1,
-    minUppercase: 1,
-    minNumbers: 1,
-    minSymbols: 1,
-  });
-}
-
-export function validateForm(member) {
+export function validateRegistrationForm(member) {
   const errors = {};
 
   if (!member.title) errors.title = 'Required';
