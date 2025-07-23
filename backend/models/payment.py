@@ -9,3 +9,4 @@ class Payment(db.Model):
     PAYMENT_Type = db.Column(db.Enum('Cash', 'Cheque', 'NETS', 'MasterCard', 'Visa', 'Amex', 'Union Pay', 'Salary Deduction'), nullable=False)
     PAYMENT_RcptNum = db.Column(db.String(20))
     PAYMENT_RcptVerifiedBy = db.Column(db.String(20))
+    PAYMENT_IsSimulated = db.Column(db.Boolean, default=False)  # ✅ 新增字段
