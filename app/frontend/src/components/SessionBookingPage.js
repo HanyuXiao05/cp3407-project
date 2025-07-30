@@ -28,7 +28,7 @@ export default function SessionBookingPage() {
   const [lastUpdated, setLastUpdated] = useState(null);
 
   // Mock member ID for demo purposes (in real app, this would come from authentication)
-  const mockMemberId = 2304; // Using integer member ID
+  const mockMemberId = 'M001';
 
   useEffect(() => {
     if (!date) {

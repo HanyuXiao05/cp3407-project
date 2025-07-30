@@ -8,13 +8,6 @@ import pymysql
 from datetime import datetime, timedelta
 from config import db_config
 
-def generate_booking_ref(sequence):
-    """Generate a shorter booking reference compatible with the database"""
-    # Format: BK + YYMMDD + 3-digit sequence
-    now = datetime.now()
-    date_part = now.strftime('%y%m%d')  # YYMMDD format
-    return f"BK{date_part}{sequence:03d}"
-
 def create_sample_bookings():
     """Create sample bookings for testing real-time availability"""
     
@@ -27,43 +20,43 @@ def create_sample_bookings():
         tomorrow = today + timedelta(days=1)
         day_after = today + timedelta(days=2)
         
-        # Sample booking data with integer member IDs and session ID 9999
+        # Sample booking data
         sample_bookings = [
             # Today's bookings
-            (generate_booking_ref(1), 2304, 9999, today, '09:00', 'Confirmed'),
-            (generate_booking_ref(2), 2305, 9999, today, '09:00', 'Confirmed'),
-            (generate_booking_ref(3), 2306, 9999, today, '09:00', 'Confirmed'),
-            (generate_booking_ref(4), 2307, 9999, today, '09:00', 'Confirmed'),
-            (generate_booking_ref(5), 2308, 9999, today, '09:00', 'Confirmed'),
-            (generate_booking_ref(6), 2309, 9999, today, '09:00', 'Confirmed'),  # Full slot
+            ('BK20241201090001', 'M001', 1, today, '09:00', 'Confirmed'),
+            ('BK20241201090002', 'M002', 1, today, '09:00', 'Confirmed'),
+            ('BK20241201090003', 'M003', 1, today, '09:00', 'Confirmed'),
+            ('BK20241201090004', 'M004', 1, today, '09:00', 'Confirmed'),
+            ('BK20241201090005', 'M005', 1, today, '09:00', 'Confirmed'),
+            ('BK20241201090006', 'M006', 1, today, '09:00', 'Confirmed'),  # Full slot
             
-            (generate_booking_ref(7), 2310, 9999, today, '10:00', 'Confirmed'),
-            (generate_booking_ref(8), 2311, 9999, today, '10:00', 'Confirmed'),
-            (generate_booking_ref(9), 2312, 9999, today, '10:00', 'Confirmed'),
+            ('BK20241201100001', 'M007', 1, today, '10:00', 'Confirmed'),
+            ('BK20241201100002', 'M008', 1, today, '10:00', 'Confirmed'),
+            ('BK20241201100003', 'M009', 1, today, '10:00', 'Confirmed'),
             
-            (generate_booking_ref(10), 2313, 9999, today, '11:00', 'Confirmed'),
-            (generate_booking_ref(11), 2314, 9999, today, '11:00', 'Confirmed'),
-            (generate_booking_ref(12), 2315, 9999, today, '11:00', 'Confirmed'),
-            (generate_booking_ref(13), 2316, 9999, today, '11:00', 'Confirmed'),
-            (generate_booking_ref(14), 2317, 9999, today, '11:00', 'Confirmed'),
+            ('BK20241201110001', 'M010', 1, today, '11:00', 'Confirmed'),
+            ('BK20241201110002', 'M011', 1, today, '11:00', 'Confirmed'),
+            ('BK20241201110003', 'M012', 1, today, '11:00', 'Confirmed'),
+            ('BK20241201110004', 'M013', 1, today, '11:00', 'Confirmed'),
+            ('BK20241201110005', 'M014', 1, today, '11:00', 'Confirmed'),
             
             # Tomorrow's bookings
-            (generate_booking_ref(15), 2318, 9999, tomorrow, '08:00', 'Confirmed'),
-            (generate_booking_ref(16), 2319, 9999, tomorrow, '08:00', 'Confirmed'),
+            ('BK20241202080001', 'M015', 1, tomorrow, '08:00', 'Confirmed'),
+            ('BK20241202080002', 'M016', 1, tomorrow, '08:00', 'Confirmed'),
             
-            (generate_booking_ref(17), 2320, 9999, tomorrow, '09:00', 'Confirmed'),
-            (generate_booking_ref(18), 2321, 9999, tomorrow, '09:00', 'Confirmed'),
-            (generate_booking_ref(19), 2322, 9999, tomorrow, '09:00', 'Confirmed'),
-            (generate_booking_ref(20), 2323, 9999, tomorrow, '09:00', 'Confirmed'),
-            (generate_booking_ref(21), 2324, 9999, tomorrow, '09:00', 'Confirmed'),
-            (generate_booking_ref(22), 2325, 9999, tomorrow, '09:00', 'Confirmed'),  # Full slot
+            ('BK20241202090001', 'M017', 1, tomorrow, '09:00', 'Confirmed'),
+            ('BK20241202090002', 'M018', 1, tomorrow, '09:00', 'Confirmed'),
+            ('BK20241202090003', 'M019', 1, tomorrow, '09:00', 'Confirmed'),
+            ('BK20241202090004', 'M020', 1, tomorrow, '09:00', 'Confirmed'),
+            ('BK20241202090005', 'M021', 1, tomorrow, '09:00', 'Confirmed'),
+            ('BK20241202090006', 'M022', 1, tomorrow, '09:00', 'Confirmed'),  # Full slot
             
             # Day after tomorrow - mostly empty
-            (generate_booking_ref(23), 2326, 9999, day_after, '08:00', 'Confirmed'),
+            ('BK20241203080001', 'M023', 1, day_after, '08:00', 'Confirmed'),
         ]
         
         # Clear existing demo bookings (optional)
-        cursor.execute("DELETE FROM booking WHERE BOOKING_Ref LIKE 'BK%' AND BOOKING_Ref NOT LIKE 'GYM%'")
+        cursor.execute("DELETE FROM booking WHERE BOOKING_Ref LIKE 'BK2024%'")
         
         # Insert sample bookings
         for booking in sample_bookings:
@@ -90,7 +83,7 @@ def clear_sample_bookings():
         conn = pymysql.connect(**db_config)
         cursor = conn.cursor()
         
-        cursor.execute("DELETE FROM booking WHERE BOOKING_Ref LIKE 'BK%' AND BOOKING_Ref NOT LIKE 'GYM%'")
+        cursor.execute("DELETE FROM booking WHERE BOOKING_Ref LIKE 'BK2024%'")
         conn.commit()
         cursor.close()
         conn.close()
