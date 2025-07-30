@@ -1,56 +1,8 @@
 import { useState, useEffect } from 'react';
 import PageLayout from './PageLayout';
 import Modal from './Modal';
+import { sessionApi } from '../services/sessionApi';
 import styles from '../styles/SessionBooking.module.css';
-
-const staffHours = {
-  Monday: [["06:00", "08:00"], ["12:00", "14:00"], ["18:00", "20:00"]],
-  Tuesday: [["06:00", "08:00"], ["12:00", "14:00"], ["18:00", "20:00"]],
-  Wednesday: [["06:00", "08:00"], ["12:00", "14:00"], ["18:00", "20:00"]],
-  Thursday: [["06:00", "08:00"], ["12:00", "14:00"], ["18:00", "20:00"]],
-  Friday: [["06:00", "08:00"], ["12:00", "14:00"], ["18:00", "20:00"]],
-  Saturday: [["07:00", "13:00"]],
-};
-
-const studentHours = {
-  Monday: [["08:00", "22:00"]],
-  Tuesday: [["08:00", "22:00"]],
-  Wednesday: [["08:00", "22:00"]],
-  Thursday: [["08:00", "22:00"]],
-  Friday: [["08:00", "22:00"]],
-  Saturday: [["08:00", "18:00"]],
-};
-
-function timeToMinutes(t) {
-  const [h, m] = t.split(":").map(Number);
-  return h * 60 + m;
-}
-
-function minutesToTime(m) {
-  const h = Math.floor(m / 60).toString().padStart(2, '0');
-  const min = (m % 60).toString().padStart(2, '0');
-  return `${h}:${min}`;
-}
-
-function getDayOfWeek(dateString) {
-  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-  return days[new Date(dateString).getDay()];
-}
-
-function generateSlots(ranges) {
-  const slots = [];
-  for (const [start, end] of ranges) {
-    let s = timeToMinutes(start);
-    const e = timeToMinutes(end);
-    while (s + 60 <= e) {
-      const from = minutesToTime(s);
-      const to = minutesToTime(s + 60);
-      slots.push(`${from} - ${to}`);
-      s += 60;
-    }
-  }
-  return slots;
-}
 
 const guidelines = [
   "Only registered gym members are allowed. No friends allowed.",
@@ -66,23 +18,50 @@ const guidelines = [
 export default function SessionBookingPage() {
   const [userType, setUserType] = useState('student');
   const [date, setDate] = useState('');
-  const [slots, setSlots] = useState([]);
+  const [slotAvailability, setSlotAvailability] = useState([]);
   const [selectedSlots, setSelectedSlots] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [bookingSuccess, setBookingSuccess] = useState(false);
+  const [bookingDetails, setBookingDetails] = useState(null);
+  const [lastUpdated, setLastUpdated] = useState(null);
+
+  // Mock member ID for demo purposes (in real app, this would come from authentication)
+  const mockMemberId = 'M001';
 
   useEffect(() => {
     if (!date) {
-      setSlots([]);
+      setSlotAvailability([]);
+      setSelectedSlots([]);
       return;
     }
-    const day = getDayOfWeek(date);
-    const ranges = userType === 'staff' ? staffHours[day] : studentHours[day];
-    if (!ranges) {
-      setSlots([]);
-      return;
-    }
-    setSlots(generateSlots(ranges));
+
+    fetchSlotAvailability();
   }, [userType, date]);
+
+  const fetchSlotAvailability = async () => {
+    if (!date) return;
+
+    setLoading(true);
+    setError('');
+
+    try {
+      const data = await sessionApi.getSlotAvailability(date, userType);
+      setSlotAvailability(data.slots || []);
+      setLastUpdated(new Date());
+    } catch (error) {
+      console.error('Error fetching slot availability:', error);
+      setError('Failed to load slot availability. Please try again.');
+      setSlotAvailability([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleRefresh = () => {
+    fetchSlotAvailability();
+  };
 
   const handleSlotChange = (slot) => {
     if (selectedSlots.includes(slot)) {
@@ -95,13 +74,67 @@ export default function SessionBookingPage() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!date || selectedSlots.length === 0) {
-      alert('Please select a valid date and at least one time slot.');
+      setError('Please select a valid date and at least one time slot.');
       return;
     }
-    setShowModal(true);
+
+    setLoading(true);
+    setError('');
+
+    try {
+      // Book each selected slot
+      const bookingPromises = selectedSlots.map(slot => 
+        sessionApi.bookSlot({
+          date: date,
+          time_slot: slot,
+          member_id: mockMemberId
+        })
+      );
+
+      const results = await Promise.all(bookingPromises);
+      
+      setBookingDetails({
+        userType: userType,
+        date: date,
+        timeSlots: selectedSlots,
+        bookingRefs: results.map(r => r.booking_ref)
+      });
+      
+      setBookingSuccess(true);
+      setShowModal(true);
+      setSelectedSlots([]);
+      
+      // Refresh availability after successful booking
+      setTimeout(() => {
+        fetchSlotAvailability();
+      }, 1000);
+      
+    } catch (error) {
+      console.error('Error booking slots:', error);
+      setError(error.message || 'Booking failed. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const getSlotStatusClass = (slot) => {
+    if (slot.is_full) return styles.full;
+    if (slot.available_spots <= 2) return styles.limited;
+    return styles.available;
+  };
+
+  const getSlotStatusText = (slot) => {
+    if (slot.is_full) return 'Full';
+    if (slot.available_spots <= 2) return `${slot.available_spots} spots left`;
+    return `${slot.available_spots} spots available`;
+  };
+
+  const formatLastUpdated = () => {
+    if (!lastUpdated) return '';
+    return lastUpdated.toLocaleTimeString();
   };
 
   return (
@@ -111,6 +144,15 @@ export default function SessionBookingPage() {
           <div className={styles.header}>
             <h2>📅 Session Booking</h2>
             <p>Select your preferred time slots for your gym session</p>
+            <div className={styles.realTimeInfo}>
+              <span className={styles.liveIndicator}>🟢</span>
+              <span>Real-time availability (Max 6 people per session)</span>
+              {lastUpdated && (
+                <span className={styles.lastUpdated}>
+                  Last updated: {formatLastUpdated()}
+                </span>
+              )}
+            </div>
           </div>
 
           <form onSubmit={handleSubmit} className={styles.bookingForm}>
@@ -141,36 +183,89 @@ export default function SessionBookingPage() {
                 value={date} 
                 onChange={e => {setDate(e.target.value); setSelectedSlots([]);}}
                 className={styles.dateInput}
+                min={new Date().toISOString().split('T')[0]}
               />
             </div>
 
             <div className={styles.formSection}>
-              <label className={styles.label}>
-                <span className={styles.labelIcon}>⏰</span>
-                Available Time Slots:
-              </label>
+              <div className={styles.sectionHeader}>
+                <label className={styles.label}>
+                  <span className={styles.labelIcon}>⏰</span>
+                  Available Time Slots:
+                </label>
+                {date && (
+                  <button 
+                    type="button" 
+                    onClick={handleRefresh}
+                    className={styles.refreshButton}
+                    disabled={loading}
+                  >
+                    {loading ? '🔄' : '🔄'} Refresh
+                  </button>
+                )}
+              </div>
+              
+              {loading && (
+                <div className={styles.loading}>
+                  <span>🔄</span>
+                  <p>Loading real-time availability...</p>
+                </div>
+              )}
+
+              {error && (
+                <div className={styles.error}>
+                  <span>⚠️</span>
+                  <p>{error}</p>
+                </div>
+              )}
+
               <div className={styles.slotGrid}>
-                {date ? (
-                  slots.length > 0 ? (
-                    slots.map((slot, i) => (
+                {date && !loading ? (
+                  slotAvailability.length > 0 ? (
+                    slotAvailability.map((slot, i) => (
                       <div 
-                        key={slot} 
-                        className={`${styles.slotItem} ${selectedSlots.includes(slot) ? styles.selected : ''}`}
-                        onClick={() => handleSlotChange(slot)}
+                        key={slot.time_slot} 
+                        className={`${styles.slotItem} ${getSlotStatusClass(slot)} ${selectedSlots.includes(slot.time_slot) ? styles.selected : ''}`}
+                        onClick={() => !slot.is_full && handleSlotChange(slot.time_slot)}
                       >
-                        <input
-                          type="checkbox"
-                          id={`slot-${i}`}
-                          name="timeSlot"
-                          value={slot}
-                          checked={selectedSlots.includes(slot)}
-                          onChange={() => handleSlotChange(slot)}
-                          disabled={!selectedSlots.includes(slot) && selectedSlots.length >= 2}
-                          className={styles.checkbox}
-                        />
-                        <label htmlFor={`slot-${i}`} className={styles.slotLabel}>
-                          {slot}
-                        </label>
+                        <div className={styles.slotHeader}>
+                          <input
+                            type="checkbox"
+                            id={`slot-${i}`}
+                            name="timeSlot"
+                            value={slot.time_slot}
+                            checked={selectedSlots.includes(slot.time_slot)}
+                            onChange={() => !slot.is_full && handleSlotChange(slot.time_slot)}
+                            disabled={slot.is_full || (!selectedSlots.includes(slot.time_slot) && selectedSlots.length >= 2)}
+                            className={styles.checkbox}
+                          />
+                          <label htmlFor={`slot-${i}`} className={styles.slotLabel}>
+                            {slot.time_slot}
+                          </label>
+                        </div>
+                        
+                        <div className={styles.slotDetails}>
+                          <div className={styles.availabilityInfo}>
+                            <span className={styles.availabilityText}>
+                              {getSlotStatusText(slot)}
+                            </span>
+                            <div className={styles.capacityBar}>
+                              <div 
+                                className={styles.capacityFill} 
+                                style={{ width: `${slot.percentage_full}%` }}
+                              ></div>
+                            </div>
+                          </div>
+                          
+                          <div className={styles.bookingStats}>
+                            <span className={styles.bookedCount}>
+                              {slot.booked_count}/6 booked
+                            </span>
+                            <span className={styles.percentage}>
+                              {slot.percentage_full}% full
+                            </span>
+                          </div>
+                        </div>
                       </div>
                     ))
                   ) : (
@@ -197,8 +292,12 @@ export default function SessionBookingPage() {
               )}
             </div>
 
-            <button type="submit" className={styles.submitButton}>
-              🎯 Confirm Booking
+            <button 
+              type="submit" 
+              className={styles.submitButton}
+              disabled={loading || selectedSlots.length === 0}
+            >
+              {loading ? '🔄 Processing...' : '🎯 Confirm Booking'}
             </button>
           </form>
         </div>
@@ -215,16 +314,26 @@ export default function SessionBookingPage() {
         </div>
       </div>
 
-      {showModal && (
+      {showModal && bookingSuccess && (
         <Modal title="🎉 Booking Confirmed!" onClose={() => setShowModal(false)}>
           <div className={styles.confirmationContent}>
-            <p>✅ Your booking has been successfully confirmed!</p>
+            <div className={styles.successIcon}>✅</div>
+            <h3>Your booking has been successfully confirmed!</h3>
             <div className={styles.bookingDetails}>
-              <p><strong>User Type:</strong> {userType}</p>
-              <p><strong>Date:</strong> {date}</p>
-              <p><strong>Time Slots:</strong> {selectedSlots.join(', ')}</p>
+              <p><strong>User Type:</strong> {bookingDetails.userType}</p>
+              <p><strong>Date:</strong> {bookingDetails.date}</p>
+              <p><strong>Time Slots:</strong> {bookingDetails.timeSlots.join(', ')}</p>
+              <p><strong>Booking References:</strong> {bookingDetails.bookingRefs.join(', ')}</p>
             </div>
-            <p>Please arrive 5 minutes before your scheduled time.</p>
+            <div className={styles.bookingInstructions}>
+              <p>📋 Please remember:</p>
+              <ul>
+                <li>Arrive 5 minutes before your scheduled time</li>
+                <li>Bring your student/staff ID</li>
+                <li>Follow all gym guidelines</li>
+                <li>End session 10 minutes early for clean-up</li>
+              </ul>
+            </div>
           </div>
         </Modal>
       )}
