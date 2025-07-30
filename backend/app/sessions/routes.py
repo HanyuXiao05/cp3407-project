@@ -164,16 +164,17 @@ def book_slot():
             conn.close()
             return jsonify({'error': 'You can only book up to 2 slots per day'}), 400
 
-        # Create the booking
-        booking_ref = f"BK{datetime.now().strftime('%Y%m%d%H%M%S')}"
+        # Create the booking with shorter reference format
+        booking_ref = generate_booking_ref()
         
+        # Use session ID 9999 for all bookings
         cursor.execute("""
             INSERT INTO booking (BOOKING_Ref, MEMBER_ID, SESSION_ID, BOOKING_Date, BOOKING_Time, BOOKING_Status)
             VALUES (%s, %s, %s, %s, %s, %s)
         """, (
             booking_ref,
             member_id,
-            1,  # Default session ID
+            9999,  # Use session ID 9999
             date,
             start_time,
             'Confirmed'
@@ -192,6 +193,14 @@ def book_slot():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+def generate_booking_ref():
+    """Generate a shorter booking reference compatible with the database"""
+    # Format: BK + YYMMDD + 3-digit sequence
+    now = datetime.now()
+    date_part = now.strftime('%y%m%d')  # YYMMDD format
+    time_part = now.strftime('%H%M')    # HHMM format
+    return f"BK{date_part}{time_part}"
 
 def generate_available_slots(date, user_type):
     """Generate available time slots based on user type and date"""
