@@ -6,7 +6,6 @@ import { validateRegistrationForm } from '../utils/validateRegistrationForm';
 // import { registerMember } from '../services/api';
 import RegistrationFormField from './RegistrationFormField';
 import Modal from './Modal';
-import { useRef } from 'react';
 
 export default function RegistrationForm() {
   const [member, setMember] = useState(EMPTY_MEMBER);
@@ -14,27 +13,32 @@ export default function RegistrationForm() {
 
   const [errorMessages, setErrorMessages] = useState({});
   const [showModal, setShowModal] = useState(false);
-  const latestMember = useRef(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const errors = validateRegistrationForm(member);
     setErrorMessages(errors);
     if (Object.keys(errors).length > 0) return;
+  
+    // registerMember(member)
+    //   .then((response) => {
+    //     console.log('Submitted:', response.data);
 
-    // Save the latest member data for navigation
-    latestMember.current = member;
-    setShowModal(true);
-    setErrorMessages({});
-    // Do NOT reset member here; reset after navigation
+        // alert('Registration successful!');
+        setShowModal(true);
+
+        setMember(EMPTY_MEMBER);
+        
+        setErrorMessages({});
+      // })
+      // .catch((error) => {
+      //   console.error('Error:', error);
+      // });
   };
 
   const handleClose = () => {
     setShowModal(false);
-    // Use the latest member data for navigation
-    const { type, membershipTypeId } = latestMember.current || {};
-    setMember(EMPTY_MEMBER);
-    navigate('/payment', { state: { type, membershipTypeId } });
+    navigate('/booking');
   };
 
   return (
