@@ -63,3 +63,52 @@ def register():
     except Exception as e:
         db.session.rollback()
         return jsonify({'error': str(e)}), 500
+
+@auth_bp.route('/login', methods=['POST'])
+def login():
+    try:
+        data = request.get_json()
+        email = data.get('email')
+        password = data.get('password')
+        
+        if not email or not password:
+            return jsonify({'error': 'Email and password are required'}), 400
+
+        # Find member by email
+        member = Member.query.filter_by(MEMBER_Email=email).first()
+        
+        if not member:
+            return jsonify({'error': 'Invalid email or password'}), 401
+
+        # Check password
+        if not check_password_hash(member.MEMBER_PwdHash, password):
+            return jsonify({'error': 'Invalid email or password'}), 401
+
+        # Check if membership is active
+        active_membership = Membership.query.filter_by(
+            MEMBER_ID=member.MEMBER_ID
+        ).filter(
+            Membership.MEMBERSHIP_ExpDate >= date.today()
+        ).first()
+
+        if not active_membership:
+            return jsonify({'error': 'Membership has expired'}), 401
+
+        # Get membership type
+        membership_type = MembershipType.query.filter_by(
+            MEM_TYPE_ID=active_membership.MEM_TYPE_ID
+        ).first()
+
+        return jsonify({
+            'message': 'Login successful',
+            'member': {
+                'member_id': member.MEMBER_ID,
+                'name': member.MEMBER_Name,
+                'email': member.MEMBER_Email,
+                'member_type': membership_type.MEM_TYPE_Name if membership_type else 'Unknown',
+                'membership_expiry': active_membership.MEMBERSHIP_ExpDate.strftime('%Y-%m-%d')
+            }
+        }), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500

@@ -38,7 +38,7 @@ export default function RegistrationForm() {
 
   const handleClose = () => {
     setShowModal(false);
-    navigate('/booking');
+    navigate('/payment', { state: { memberData: member } });
   };
 
   return (
