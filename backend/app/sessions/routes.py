@@ -227,7 +227,7 @@ def book_slot():
         session_id = session_result[0]
         
         # Create the booking with unique reference (BK + timestamp)
-        max_attempts = 5
+        max_attempts = 10
         for attempt in range(max_attempts):
             timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
             booking_ref = f"BK{timestamp}"
@@ -247,8 +247,8 @@ def book_slot():
                 break  # Success, exit the retry loop
             except pymysql.err.IntegrityError as e:
                 if "Duplicate entry" in str(e) and attempt < max_attempts - 1:
-                    # Add a small delay to get a different timestamp
-                    time.sleep(0.1)
+                    # Add a longer delay to ensure different timestamp
+                    time.sleep(1)
                     continue  # Try again with a new timestamp
                 else:
                     raise  # Re-raise the error if max attempts reached
@@ -340,7 +340,7 @@ def book_multiple_slots():
             session_id = session_result[0]
             
             # Create the booking with unique reference (BK + timestamp)
-            max_attempts = 5
+            max_attempts = 10
             for attempt in range(max_attempts):
                 timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
                 booking_ref = f"BK{timestamp}"
@@ -364,8 +364,8 @@ def book_multiple_slots():
                     break
                 except pymysql.err.IntegrityError as e:
                     if "Duplicate entry" in str(e) and attempt < max_attempts - 1:
-                        # Add a small delay to get a different timestamp
-                        time.sleep(0.1)
+                        # Add a longer delay to ensure different timestamp
+                        time.sleep(1)
                         continue  # Try again with a new timestamp
                     else:
                         raise  # Re-raise the error if max attempts reached
