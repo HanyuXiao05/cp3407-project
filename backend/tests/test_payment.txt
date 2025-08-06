@@ -1,0 +1,14 @@
+def test_purchase_membership(self):
+    # 🟢 先注册并登录
+    self.test_register_success()
+    self.client.post('/api/auth/login', json={
+        'email': 'test@example.com',
+        'password': 'testpass'
+    })
+
+    # 🟢 模拟登录后购买
+    response = self.client.post('/api/payment/purchase', json={
+        'type_id': 1
+    })
+    self.assertEqual(response.status_code, 201)
+    self.assertIn(b'Membership purchased successfully', response.data)
