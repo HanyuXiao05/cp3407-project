@@ -1,0 +1,14 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.divider {
+  height: 2px;
+  background-color: #A0F9FF;
+  transform: translateY(55px);
+}
+
+button {
+  border: none;
+  cursor: pointer;
+}

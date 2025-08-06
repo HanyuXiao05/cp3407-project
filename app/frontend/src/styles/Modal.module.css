@@ -1,0 +1,45 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.box {
+  background-color: white;
+  border-radius: 8px;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.box h2, .box p, .box button {
+  padding: 0 30px;
+}
+
+.box h2 {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.box p {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.modalDivider {
+  transform: none;
+  margin: 24px 0;
+}
+
+.box button {
+  margin-bottom: 20px;
+  background: none;
+  font-size: 16px;
+  align-self: flex-end;
+}
