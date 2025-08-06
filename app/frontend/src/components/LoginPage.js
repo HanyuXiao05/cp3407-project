@@ -6,7 +6,7 @@ import { loginMember } from '../services/api';
 
 export default function LoginPage() {
   const [formData, setFormData] = useState({
-    email: '',
+    jcId: '',
     password: ''
   });
   const [loading, setLoading] = useState(false);
@@ -27,9 +27,9 @@ export default function LoginPage() {
     setError('');
 
     try {
-      if (formData.email && formData.password) {
+      if (formData.jcId && formData.password) {
         const response = await loginMember({
-          email: formData.email,
+          jcId: formData.jcId,
           password: formData.password
         });
 
@@ -62,17 +62,22 @@ export default function LoginPage() {
 
           <form onSubmit={handleSubmit} className={styles.loginForm}>
             <div className={styles.formGroup}>
-              <label htmlFor="email">Email Address</label>
+              <label htmlFor="jcId">Login ID</label>
               <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
+                type="text"
+                id="jcId"
+                name="jcId"
+                value={formData.jcId}
                 onChange={handleInputChange}
-                placeholder="Enter your email"
+                placeholder="Enter your Login ID (e.g., jc123456)"
+                pattern="jc[0-9]{6}"
+                title="Login ID must start with 'jc' followed by 6 digits"
                 required
                 className={styles.input}
               />
+              <small className={styles.helpText}>
+                Format: jc + 6 digits (e.g., jc123456)
+              </small>
             </div>
 
             <div className={styles.formGroup}>
