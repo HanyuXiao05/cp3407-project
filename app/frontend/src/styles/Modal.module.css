@@ -12,23 +12,23 @@
 .box {
   background-color: white;
   border-radius: 8px;
-  max-width: 400px;
+  max-width: 560px;
   display: flex;
   flex-direction: column;
   text-align: center;
 }
 
 .box h2, .box p, .box button {
-  padding: 0 20px;
+  padding: 0 30px;
 }
 
 .box h2 {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 700;
 }
 
 .box p {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 500;
 }
 
@@ -38,23 +38,9 @@
 }
 
 .box button {
-  margin: 20px 30px 20px 0;
-  background: #007bff;
-  color: white;
   border: none;
-  padding: 12px 24px;
-  border-radius: 6px;
+  margin-bottom: 20px;
+  background: none;
   font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.2s;
   align-self: flex-end;
-}
-
-.box button:hover {
-  background: #0056b3;
-}
-
-.box button:active {
-  background: #004085;
 }

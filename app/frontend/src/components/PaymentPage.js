@@ -87,7 +87,7 @@ export default function PaymentPage() {
     }
   };
 
-  const handleCloseModal = () => {
+  const handleClose = () => {
     setShowModal(false);
     navigate('/booking', { state: { memberData } });
   };
@@ -263,15 +263,18 @@ export default function PaymentPage() {
       </PageLayout>
 
       {showModal && (
-        <Modal onClose={handleCloseModal}>
-          <div className={styles.successMessage}>
-            <h3>Payment Successful!</h3>
-            <p>Your gym membership has been activated.</p>
-            <p>You can now proceed to book your gym sessions.</p>
-            <button onClick={handleCloseModal} className={styles.primaryButton}>
-              Continue to Session Booking
-            </button>
-          </div>
+        <Modal
+          title='MEMBERSHIP ACTIVATED'
+          onClose={handleClose}
+        >
+          <p>
+            An email has been sent to your registered email address containing your membership 
+            and payment details, along with the Gym Handbook.
+          </p>
+          <p>
+            If you have not received it, please check your spam/junk mail or verify that your 
+            details are correct.
+          </p>
         </Modal>
       )}
     </>
