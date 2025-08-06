@@ -87,6 +87,7 @@
 }
 
 .registrationRow button {
+  border: none;
   width: 362px;
   height: 40px;
   background-color: #172DD5;

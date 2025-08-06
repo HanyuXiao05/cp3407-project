@@ -5,6 +5,7 @@ import LoginPage from './components/LoginPage';
 import PaymentPage from './components/PaymentPage';
 import SessionBookingPage from './components/SessionBookingPage';
 import AdminDashboard from './components/AdminDashboard';
+import VirtualTourPage from './components/VirtualTourPage';
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
         <Route path='/payment' element={<PaymentPage />} />
         <Route path='/booking' element={<SessionBookingPage />} />
         <Route path='/admin' element={<AdminDashboard />} />
+        <Route path='/tour' element={<VirtualTourPage />} />
       </Routes>
     </BrowserRouter>
   );

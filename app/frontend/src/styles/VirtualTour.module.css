@@ -1,0 +1,61 @@
+.virtualTourContainer {
+  position: relative;
+}
+
+.mapContainer {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.gymLocation {
+  width: 100%;
+  display: block;
+}
+
+.mapHotspot {
+  position: absolute;
+  left: 84.3%;
+  top: 59.3%;
+  width: 9%;
+  height: 6%;
+  background: rgba(0, 0, 255, 0.3);
+  border: none;
+  cursor: pointer;
+}
+
+.interiorOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.interiorContainer {
+  width: 80%;
+  max-width: 1200px;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+}
+
+.gymInterior {
+  width: 200%;
+  display: block;
+}
+
+.closeButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #fff;
+  cursor: pointer;
+}
