@@ -18,7 +18,7 @@ class AuthTestCase(unittest.TestCase):
     def test_register_missing_fields(self):
         response = self.client.post('/api/auth/register2', json={
             "email": "test@example.com"
-            # 缺少 password
+            # lack password
         })
         self.assertEqual(response.status_code, 400)
         self.assertIn(b'Missing required field', response.data)

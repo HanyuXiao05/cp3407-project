@@ -1,5 +1,5 @@
 import unittest
-from app import create_app  # 确保你的 app/__init__.py 有 create_app 函数
+from app import create_app
 
 class BasicTestCase(unittest.TestCase):
     def setUp(self):
