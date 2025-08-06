@@ -8,7 +8,7 @@ from app.models.member import Member
 from app.models.membership import Membership
 from app.models.membership_type import MembershipType
 
-auth_bp = Blueprint('auth', __name__)  # ✅ 一定要先定义这个！
+auth_bp = Blueprint('auth', __name__)  # 
 
 @auth_bp.route('/register', methods=['POST'])
 def register():
