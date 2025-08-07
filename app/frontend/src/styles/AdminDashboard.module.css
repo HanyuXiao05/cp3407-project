@@ -1,0 +1,436 @@
+.adminContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.header h1 {
+  color: #333;
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.header p {
+  color: #666;
+  font-size: 16px;
+}
+
+.tabNavigation {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 10px;
+}
+
+.tabButton {
+  background: none;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #666;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.tabButton:hover {
+  background: #f8f9fa;
+  color: #333;
+}
+
+.tabButton.active {
+  background: #007bff;
+  color: white;
+}
+
+/* Overview Tab */
+.overviewTab {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.dateSelector {
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.dateSelector label {
+  font-weight: 600;
+  color: #333;
+}
+
+.dateInput {
+  padding: 10px 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+.dateInput:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.statCard {
+  background: #f8f9fa;
+  padding: 25px;
+  border-radius: 12px;
+  text-align: center;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.statCard:hover {
+  border-color: #007bff;
+  transform: translateY(-2px);
+}
+
+.statCard h3 {
+  color: #666;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.statValue {
+  font-size: 36px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.statLabel {
+  color: #999;
+  font-size: 14px;
+}
+
+.recentActivity {
+  margin-top: 30px;
+}
+
+.recentActivity h3 {
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.activityList {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.activityItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid #007bff;
+}
+
+.activityInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.memberName {
+  font-weight: 600;
+  color: #333;
+}
+
+.bookingTime {
+  color: #666;
+  font-size: 14px;
+}
+
+.statusBadge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* Members Tab */
+.membersTab {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.tableHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.tableHeader h3 {
+  color: #333;
+  font-size: 20px;
+  margin: 0;
+}
+
+.searchBox {
+  position: relative;
+}
+
+.searchInput {
+  padding: 10px 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 16px;
+  width: 250px;
+  transition: border-color 0.3s;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.membersTable {
+  overflow-x: auto;
+}
+
+.membersTable table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.membersTable th,
+.membersTable td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.membersTable th {
+  background: #f8f9fa;
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+}
+
+.membersTable td {
+  color: #666;
+  font-size: 14px;
+}
+
+.membersTable tr:hover {
+  background: #f8f9fa;
+}
+
+/* Bookings Tab */
+.bookingsTab {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.filterControls {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.filterSelect {
+  padding: 10px 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 16px;
+  background: white;
+  transition: border-color 0.3s;
+}
+
+.filterSelect:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.bookingsTable {
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+.bookingsTable table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.bookingsTable th,
+.bookingsTable td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.bookingsTable th {
+  background: #f8f9fa;
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+}
+
+.bookingsTable td {
+  color: #666;
+  font-size: 14px;
+}
+
+.bookingsTable tr:hover {
+  background: #f8f9fa;
+}
+
+.actionButtons {
+  display: flex;
+  gap: 8px;
+}
+
+.actionBtn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.actionBtn:first-child {
+  background: #007bff;
+  color: white;
+}
+
+.actionBtn:last-child {
+  background: #dc3545;
+  color: white;
+}
+
+.actionBtn:hover {
+  opacity: 0.8;
+}
+
+/* Attendance Tab */
+.attendanceTab {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.attendanceStats {
+  color: #28a745;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.attendanceTable {
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+.attendanceTable table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+}
+
+.attendanceTable th,
+.attendanceTable td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.attendanceTable th {
+  background: #f8f9fa;
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+}
+
+.attendanceTable td {
+  color: #666;
+  font-size: 14px;
+}
+
+.attendanceTable tr:hover {
+  background: #f8f9fa;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .adminContainer {
+    padding: 10px;
+  }
+  
+  .tabNavigation {
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  
+  .tabButton {
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+  
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .tableHeader {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+  }
+  
+  .searchInput {
+    width: 100%;
+  }
+  
+  .filterControls {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .membersTable,
+  .bookingsTable,
+  .attendanceTable {
+    font-size: 12px;
+  }
+  
+  .membersTable th,
+  .membersTable td,
+  .bookingsTable th,
+  .bookingsTable td,
+  .attendanceTable th,
+  .attendanceTable td {
+    padding: 8px 10px;
+  }
+} 
