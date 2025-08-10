@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `booking`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `booking` (
-  `BOOKING_Ref` varchar(20) NOT NULL,
+  `BOOKING_Ref` varchar(12) NOT NULL,
   `MEMBER_ID` int NOT NULL,
   `SESSION_ID` int NOT NULL,
   `BOOKING_Date` date NOT NULL,
@@ -54,7 +54,9 @@ DROP TABLE IF EXISTS `member`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `member` (
-  `MEMBER_ID` int NOT NULL,
+  `MEMBER_ID` int NOT NULL AUTO_INCREMENT,
+  `MEMBER_JCID` char(8) NOT NULL,
+  `MEMBER_JCCompUsrnme` char(8) NOT NULL,
   `MEMBER_Title` enum('Mr','Mrs','Ms') NOT NULL,
   `MEMBER_Name` varchar(45) NOT NULL,
   `MEMBER_Gender` enum('Male','Female') NOT NULL,
@@ -86,7 +88,7 @@ DROP TABLE IF EXISTS `membership`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `membership` (
-  `MEMBERSHIP_ID` int NOT NULL,
+  `MEMBERSHIP_ID` int NOT NULL AUTO_INCREMENT,
   `MEMBER_ID` int NOT NULL,
   `MEM_TYPE_ID` int NOT NULL,
   `MEMBERSHIP_StartDate` date NOT NULL,
@@ -117,7 +119,7 @@ DROP TABLE IF EXISTS `membership_type`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `membership_type` (
-  `MEM_TYPE_ID` int NOT NULL,
+  `MEM_TYPE_ID` int NOT NULL AUTO_INCREMENT,
   `MEM_TYPE_Name` varchar(45) NOT NULL,
   `MEM_TYPE_Fee` decimal(6,2) NOT NULL,
   PRIMARY KEY (`MEM_TYPE_ID`)
@@ -141,7 +143,7 @@ DROP TABLE IF EXISTS `payment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `payment` (
-  `PAYMENT_ID` int NOT NULL,
+  `PAYMENT_ID` int NOT NULL AUTO_INCREMENT,
   `MEMBERSHIP_ID` int NOT NULL,
   `PAYMENT_Date` date NOT NULL,
   `PAYMENT_TotalFee` decimal(6,2) NOT NULL,
@@ -171,7 +173,7 @@ DROP TABLE IF EXISTS `session`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `session` (
-  `SESSION_ID` int NOT NULL,
+  `SESSION_ID` int NOT NULL AUTO_INCREMENT,
   `SESSION_Date` date NOT NULL,
   `SESSION_Time` time NOT NULL,
   `SESSION_Capacity` int NOT NULL,
@@ -197,4 +199,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-06-20 20:00:51
+-- Dump completed on 2025-07-15  9:04:07
