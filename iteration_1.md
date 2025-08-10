@@ -1,15 +1,11 @@
-# Actual iteration-1 board, (see chapters 3 and 4), add your start and end dates 
-
-Checklist:
-1. github entry timestamps
-2. User stories are correct: see p39
+# iteration-1
 
 * Assumed Velocity: 0.7
 * Number of developers: 4
 * Total estimated amount of work: 18 (initial: 11) days
 
-User stories or tasks (see chapter 4):
-# Todo
+## User stories or tasks:
+### Todo
 1. Secure Storage, priority Low, 3 (initial: 3) days  
    - Create database schema with sample records, 1 day
    - Integrate database with Flask using Flask-SQLAlchemy, 2 day
@@ -33,11 +29,9 @@ User stories or tasks (see chapter 4):
    - Integrated user authentication for session booking,1 day
    - Testing for booking flow, 1 day
 
-# In progress:
+### In progress:
 
-# Complete:
-
-# Completed:
+### Completed:
 * Secure Storage
    - Create database schema with sample records (TQRN), 20 June 2025
    - Integrate database with Flask using Flask-SQLAlchemy (HX, YJ), 21 June 2025
@@ -65,11 +59,11 @@ Secure Storage was completed first due to high priority feature Secure Online Re
 Membership Payment Handling was completed before Session Booking, as it is part of Secure Online Registration 
 since payment is compulsory to register for a membership in the existing gym system.
 
-### Burn Down for iteration-1 (see chapter 4):
+## Burn Down for iteration-1:
 Update this at least once per week
 * 4 weeks left, 18 days of estimated amount of work 
 * 2 weeks left, 10 days
-* 1 weeks left, 5 days
+* 1 week left, 5 days
 * 0 weeks left, 0 days
 * Actual Velocity: 18 / (20 x 4) = 0.225
 
