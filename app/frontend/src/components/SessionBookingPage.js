@@ -26,6 +26,8 @@ export default function SessionBookingPage() {
   const [bookingSuccess, setBookingSuccess] = useState(false);
   const [bookingDetails, setBookingDetails] = useState(null);
   const [lastUpdated, setLastUpdated] = useState(null);
+  const [gymCapacity, setGymCapacity] = useState(null);
+  const [capacityLoading, setCapacityLoading] = useState(false);
 
   // Mock member ID for demo purposes (in real app, this would come from authentication)
   const mockMemberId = 'M001';
@@ -34,10 +36,12 @@ export default function SessionBookingPage() {
     if (!date) {
       setSlotAvailability([]);
       setSelectedSlots([]);
+      setGymCapacity(null);
       return;
     }
 
     fetchSlotAvailability();
+    fetchGymCapacity();
   }, [userType, date]);
 
   const fetchSlotAvailability = async () => {
@@ -56,6 +60,22 @@ export default function SessionBookingPage() {
       setSlotAvailability([]);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchGymCapacity = async () => {
+    if (!date) return;
+
+    setCapacityLoading(true);
+
+    try {
+      const data = await sessionApi.getGymCapacity(date);
+      setGymCapacity(data);
+    } catch (error) {
+      console.error('Error fetching gym capacity:', error);
+      setGymCapacity(null);
+    } finally {
+      setCapacityLoading(false);
     }
   };
 
@@ -85,22 +105,18 @@ export default function SessionBookingPage() {
     setError('');
 
     try {
-      // Book each selected slot
-      const bookingPromises = selectedSlots.map(slot => 
-        sessionApi.bookSlot({
-          date: date,
-          time_slot: slot,
-          member_id: mockMemberId
-        })
-      );
-
-      const results = await Promise.all(bookingPromises);
+      // Book all selected slots in a single request
+      const result = await sessionApi.bookMultipleSlots({
+        date: date,
+        time_slots: selectedSlots,
+        member_id: mockMemberId
+      });
       
       setBookingDetails({
         userType: userType,
         date: date,
         timeSlots: selectedSlots,
-        bookingRefs: results.map(r => r.booking_ref)
+        bookingRefs: result.bookings.map(b => b.booking_ref)
       });
       
       setBookingSuccess(true);
@@ -114,7 +130,14 @@ export default function SessionBookingPage() {
       
     } catch (error) {
       console.error('Error booking slots:', error);
-      setError(error.message || 'Booking failed. Please try again.');
+      
+      // Handle specific error with available dates
+      if (error.response && error.response.data && error.response.data.available_dates) {
+        const availableDates = error.response.data.available_dates.join(', ');
+        setError(`No sessions available for the selected date. Available dates: ${availableDates}`);
+      } else {
+        setError(error.message || 'Booking failed. Please try again.');
+      }
     } finally {
       setLoading(false);
     }
@@ -155,6 +178,45 @@ export default function SessionBookingPage() {
             </div>
           </div>
 
+          {/* Gym Capacity Information */}
+          {date && gymCapacity && (
+            <div className={styles.capacityCard}>
+              <h3>🏋️ Gym Capacity Overview</h3>
+              <div className={styles.capacityStats}>
+                <div className={styles.capacityStat}>
+                  <span className={styles.statLabel}>Total Bookings:</span>
+                  <span className={styles.statValue}>{gymCapacity.total_bookings}</span>
+                </div>
+                <div className={styles.capacityStat}>
+                  <span className={styles.statLabel}>Available Spots:</span>
+                  <span className={styles.statValue}>{gymCapacity.total_available_spots}</span>
+                </div>
+                <div className={styles.capacityStat}>
+                  <span className={styles.statLabel}>Overall Capacity:</span>
+                  <span className={styles.statValue}>{gymCapacity.overall_percentage_full}%</span>
+                </div>
+              </div>
+              {gymCapacity.time_slot_capacity.length > 0 && (
+                <div className={styles.timeSlotCapacity}>
+                  <h4>📊 Time Slot Breakdown</h4>
+                  <div className={styles.capacityGrid}>
+                    {gymCapacity.time_slot_capacity.map((slot, index) => (
+                      <div key={index} className={styles.capacityItem}>
+                        <span className={styles.timeSlot}>{slot.time}</span>
+                        <span className={styles.capacityInfo}>
+                          {slot.booked_count}/6 ({slot.percentage_full}%)
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+              <div className={styles.capacityFooter}>
+                <small>Last updated: {gymCapacity.last_updated}</small>
+              </div>
+            </div>
+          )}
+
           <form onSubmit={handleSubmit} className={styles.bookingForm}>
             <div className={styles.formSection}>
               <label htmlFor="userType" className={styles.label}>
@@ -183,8 +245,12 @@ export default function SessionBookingPage() {
                 value={date} 
                 onChange={e => {setDate(e.target.value); setSelectedSlots([]);}}
                 className={styles.dateInput}
-                min={new Date().toISOString().split('T')[0]}
+                min="2025-09-22"
+                max="2025-10-11"
               />
+              <small style={{color: '#666', fontSize: '12px', marginTop: '5px', display: 'block'}}>
+                📅 Available dates: September 22 - October 11, 2025
+              </small>
             </div>
 
             <div className={styles.formSection}>

@@ -38,6 +38,7 @@
 }
 
 .box button {
+  border: none;
   margin-bottom: 20px;
   background: none;
   font-size: 16px;

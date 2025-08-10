@@ -1,0 +1,31 @@
+MEMBER_ID,MEMBER_JCID,MEMBER_JCCompUsrnme,MEMBER_Title,MEMBER_Name,MEMBER_Gender,MEMBER_DOB,MEMBER_Phone,MEMBER_Email,MEMBER_EmgContactName,MEMBER_EmgContactPhone,MEMBER_PwdHash,MEMBER_Type
+2303,14123456,jc812345,Mr,Tyler Pope,Male,2003-08-03,9123 4567,tyler.pope@my.jcu.edu.au,Nadine Pope,9456 7890,$2b$12$FqhP1GqXqkD8vE78vHT9SuNX6ltHEz/Rt5O7rjl49.CWXIjF1q3p6,Student
+2304,84123456,jc123456,Mrs,Erika Bowen,Female,1953-04-07,9234 5678,erika.bowen@jcu.edu.au,NULL,NULL,$2b$12$LrKMIRY3rb9JvGK19fwR1.WIF53RSbRzmKuF7nYbbT3HTQmt4FR0y,Staff
+2305,14123457,jc812346,Ms,Vera Alvarado,Female,2005-04-09,9345 6789,vera.alvarado@my.jcu.edu.au,Allen Alvarado,9567 8901,$2b$12$MEqZUmjsNxUQF.GZqc/6AeTKWQ6zLE7hHL8VIMzH/yExfRHyj5NzC,Student
+2306,14123458,jc812347,Mrs,Aria Williams,Female,1998-11-14,9056 9380,aria.williams@my.jcu.edu.au,NULL,NULL,$2b$12$o01zrXX1U9q3rg.sCSGLXrxilGnR.ez9PdQn.pyeFpyPjDs9gWcnF,Student
+2307,14123459,jc812348,Mrs,Ella Brown,Female,2005-06-30,9769 4964,ella.brown@my.jcu.edu.au,Alex Brown,9255 4871,$2b$12$eBWrhA6/S/Tf.AYH/MtRkDN/MBuzVYjBGrWdYjkAgSm4eBW.OoAPP,Student
+2308,14123460,jc812349,Mr,Sebastian Garcia,Male,2005-03-21,9453 8055,sebastian.garcia@my.jcu.edu.au,Amanda Garcia,9554 6110,$2b$12$0YI6wyBRDAeA.dM65mD/leulUqtCbWy9RoSFZmv0JylmpbWZNDVWq,Student
+2309,14123461,jc812350,Mrs,Layla Lee,Female,2001-09-08,9693 1009,layla.lee@my.jcu.edu.au,NULL,NULL,$2b$12$/mT/PD82ggGV6qXxqBTghBmR1yFLDIOg/xhm3FprZ0BWSNy6/dZej,Student
+2310,14123462,jc812351,Mr,Michael Gonzalez,Male,1999-10-19,9815 2994,michael.gonzalez@my.jcu.edu.au,Rachel Gonzalez,9351 7859,$2b$12$jssY.j8He9czC0TEO9LhKk.pFSO.hZbPDVuW8XmRS7Rn6uaipCK//,Student
+2311,14123463,jc812352,Mrs,Ella Clark,Female,2004-08-11,9045 4280,ella.clark@my.jcu.edu.au,David Clark,9637 4411,$2b$12$6wv9FLzJpW6UAid7geRfUZV4e.6YCsv26v7XDos90wmyaBs/bTKXm,Student
+2312,14123464,jc812353,Mr,Oliver Hernandez,Male,2001-01-14,9631 0187,oliver.hernandez@my.jcu.edu.au,Linda Hernandez,9204 7682,$2b$12$gluufybP5WGDhRW3DRNKcTD8f3xoV5rC5AbzGycyLCflZjHtlwECA,Student
+2313,84123457,jc123457,Mr,Benjamin Perez,Male,1961-02-10,9927 0529,benjamin.perez@jcu.edu.au,NULL,NULL,$2b$12$M5cOfybrvuK7mAk2UtpNFkJl4EFxyqiCaungKKbUsmffJpkR5CU2W,Staff
+2314,14123465,jc812354,Mr,Lucas Smith,Male,2003-06-07,9340 5299,lucas.smith@my.jcu.edu.au,Carol Smith,9760 3114,$2b$12$QjP1n3/L69Pwe0g9IzxA2x8XMyXkNZMrm75cc0nCRTZ.YorjP1l48,Student
+2315,84123458,jc123458,Mr,Gabriel Lee,Male,1977-06-27,9636 6213,gabriel.lee@jcu.edu.au,Grace Lee,9942 2845,$2b$12$3qXHPwEAHia6LHyAH8JLOllrWForAImfE1KxI1ZK8SoKWDl98xFcA,Staff
+2316,14123466,jc812355,Mr,Benjamin Anderson,Male,2004-03-13,9861 8123,benjamin.anderson@my.jcu.edu.au,Andrea Anderson,9093 8420,$2b$12$NgiDXhHvGbYHY65KQuAuOux68gn4dKE.l1USfNSsHw/uzjKXpWKM7,Student
+2317,84123459,jc123459,Mrs,Sophia Wilson,Female,1968-01-09,9022 0934,sophia.wilson@jcu.edu.au,NULL,NULL,$2b$12$yWav2nM5C/6Xn6sKN5U9CpTQiTbIK4BQcjgtjv7d.Qeoe9XsMy43i,Staff
+2318,84123460,jc123460,Mr,Anthony Davis,Male,1958-04-15,9771 5840,anthony.davis@jcu.edu.au,Olivia Davis,9680 2296,$2b$12$uOeUe9VGcSFFp7R94rVOZ9eUEAkzcE84fWkzlmSWta7uHL7i9CCwC,Staff
+2319,14123467,jc812356,Ms,Emily Martinez,Female,2002-03-02,9065 4457,emily.martinez@my.jcu.edu.au,Carlos Martinez,9166 7431,$2b$12$HZZK3z6eAVQVzHuH4mKr5RxYQsNySj0zlE2Gwmv1Un8I2hYg4WSeG,Student
+2320,84123461,jc123461,Mr,James Brown,Male,1975-10-30,9418 3772,james.brown@jcu.edu.au,NULL,NULL,$2b$12$dG96AAtr5EEJnO4RK8fKYb3lGszC4nhE6v8wgOacYivDVvi/aMQjK,Staff
+2321,14123468,jc812357,Mr,Aiden Clark,Male,2000-06-11,9723 6815,aiden.clark@my.jcu.edu.au,Evelyn Clark,9783 5130,$2b$12$L6u9ZDCF3aF8gWJgdTYhONcpOZx59aLYl62wWxpWlSQhV2giEXZbF,Student
+2322,84123462,jc123462,Ms,Grace Lewis,Female,1987-08-07,9779 7241,grace.lewis@jcu.edu.au,Matthew Lewis,9374 6023,$2b$12$Sz7hJau4sKIlIiVRt3LrpAWSk9LScWcyyowNwUG6LsXAQ5ea70J2W,Staff
+2323,14123469,jc812358,Mr,Daniel Smith,Male,2002-01-27,9214 6650,daniel.smith@my.jcu.edu.au,NULL,NULL,$2b$12$AyjZawWIuSY5v8Srg6UhXGXUay.gwZ29V9Ia7Aq2n.JlyqOi8fEQW,Student
+2324,84123463,jc123463,Ms,Sofia Perez,Female,1979-05-08,9534 2198,sofia.perez@jcu.edu.au,Jason Perez,9944 6119,$2b$12$bodsuentvr9SQrTRPw06LEGiSWn/xNH7qHTyrbs90JnvfO9miu2Ca,Staff
+2325,14123470,jc812359,Mr,Michael Lee,Male,1999-11-22,9077 0612,michael.lee@my.jcu.edu.au,Alice Lee,9730 1203,$2b$12$LKnKe7AOUT0DLorGLUPg2g4.Ld3jnnE6l913bFm.qvapc1CCEbUFr,Student
+2326,84123464,jc123464,Mrs,Sophia Clark,Female,1972-11-20,9592 3960,sophia.clark@jcu.edu.au,NULL,NULL,$2b$12$YKRsxwASQfcZDgyhH7MusVz02yo69cQ4u8YX3AV5OW5figGGU5OJ6,Staff
+2327,14123471,jc812360,Mr,Daniel Hernandez,Male,1999-09-08,9010 0075,daniel.hernandez@my.jcu.edu.au,Laura Hernandez,9281 4378,$2b$12$eFltSN5ag.3TgHeGLCIOMIZrYlcAdzco10BZpCgUXzXhEzfcQIL/n,Student
+2328,84123465,jc123465,Mr,Oliver Sanchez,Male,1974-05-11,9383 1212,oliver.sanchez@jcu.edu.au,Gloria Sanchez,9544 2460,$2b$12$QJKi2ZNszTdJYf6AyMHALHWvI82eyn0QanPcoU6PW4uAuaysgGlYJ,Staff
+2329,84123466,jc123466,Mr,Samuel Harris,Male,1972-10-10,9622 0592,samuel.harris@jcu.edu.au,Patricia Harris,9724 3304,$2b$12$Ht7TS6x5gjZlU6shvxobHEuHvErBGci6VFV1wksL/Wm6DZZQMm7fU,Staff
+2330,14123472,jc812361,Mr,Sebastian Jackson,Male,2001-05-21,9546 2291,sebastian.jackson@my.jcu.edu.au,Rosa Jackson,9468 7722,$2b$12$mFe9UB5ctgOjxtC/RLhTsvoSaflWzfNuzXHEEIIVXXvm0TX2xi0K9,Student
+2331,84123467,jc123467,Mr,Oliver Thomas,Male,1956-02-13,9936 5620,oliver.thomas@jcu.edu.au,Betty Thomas,9183 5836,$2b$12$6voKo3DHV02d8WLaaDqmscbEIWk5RVWH67QKxFMtabbwWj7l4/q5x,Staff
+2332,14123473,jc812362,Mrs,Charlotte Rodriguez,Female,2006-12-11,9439 7833,charlotte.rodriguez@my.jcu.edu.au,Juan Rodriguez,9684 5540,$2b$12$wd.Zcxax0/HY7tdbrXdMnSHYoiVBrEWrsRCBf5DF0LmoyXLuDBmcR,Student

@@ -1,3 +1,33 @@
+.headerContainer {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.offlineNote {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.signInPrompt {
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.signInButton {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #172DD5;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.signInButton:hover {
+  background-color: #1f1fa3;
+}
+
 .formGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -87,6 +117,7 @@
 }
 
 .registrationRow button {
+  border: none;
   width: 362px;
   height: 40px;
   background-color: #172DD5;

@@ -5,14 +5,14 @@ import { useNavigate } from 'react-router-dom';
 import { validateRegistrationForm } from '../utils/validateRegistrationForm';
 // import { registerMember } from '../services/api';
 import RegistrationFormField from './RegistrationFormField';
-import Modal from './Modal';
+// import Modal from './Modal';
 
 export default function RegistrationForm() {
   const [member, setMember] = useState(EMPTY_MEMBER);
   const navigate = useNavigate();
 
   const [errorMessages, setErrorMessages] = useState({});
-  const [showModal, setShowModal] = useState(false);
+  // const [showModal, setShowModal] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,7 +25,9 @@ export default function RegistrationForm() {
     //     console.log('Submitted:', response.data);
 
         // alert('Registration successful!');
-        setShowModal(true);
+        // setShowModal(true);
+
+        navigate('/payment', { state: { memberData: member } });
 
         setMember(EMPTY_MEMBER);
         
@@ -36,10 +38,10 @@ export default function RegistrationForm() {
       // });
   };
 
-  const handleClose = () => {
-    setShowModal(false);
-    navigate('/booking');
-  };
+  // const handleClose = () => {
+  //   setShowModal(false);
+  //   navigate('/payment', { state: { memberData: member } });
+  // };
 
   return (
     <>
@@ -299,7 +301,7 @@ export default function RegistrationForm() {
         )}
       </form>
 
-      {showModal && (
+      {/* {showModal && (
         <Modal
           title='MEMBERSHIP ACTIVATED'
           onClose={handleClose}
@@ -313,7 +315,7 @@ export default function RegistrationForm() {
             details are correct.
           </p>
         </Modal>
-      )}
+      )} */}
     </>
   );
 }
