@@ -52,3 +52,5 @@ Update this at least once per week
 * 1 week left: 5 days remaining  
 * 0 weeks left: 0 days remaining  
 * Actual Velocity: 20 / (20 × 4) = 0.25
+
+<img src="burn_down_charts/iteration_2_chart.jpeg" alt="Iteration 1 burn down chart" width="350"/>
